@@ -6,16 +6,16 @@ import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 
 import java.lang.reflect.Field;
 
-public class RideableCaveSpider extends EntityCaveSpider implements RideableEntity
+public class RideableCow extends EntityCow implements RideableEntity
 {
 	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed;
 
-	public RideableCaveSpider(org.bukkit.World world)
+	public RideableCow(org.bukkit.World world)
 	{
 		this(((CraftWorld)world).getHandle());
 	}
 
-	public RideableCaveSpider(World world)
+	public RideableCow(World world)
 	{
 		super(world);
 		this.climbHeight = 1f;
@@ -24,18 +24,11 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 		this.speed = 1f;
 		this.backwardSpeed = 0.25f;
 		this.sidewaySpeed = 0.4f;
-
+		
 		this.goalSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 		this.targetSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(20.0D);
-	}
-
-	@Override
-	public void aQ()
-	{
-		this.E = true;
-		this.fallDistance = 0;
 	}
 	
 	@Override
@@ -44,9 +37,9 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 		if(this.passengers == null || !(this.passengers instanceof EntityHuman))
 		{
 			this.P = 0.5f;
-	        super.g(sideMot, forMot);
-	        return;
-	    }
+			super.g(sideMot, forMot);
+			return;
+		}
 		
 		this.lastYaw = this.yaw = ((EntityHuman) this.passengers).yaw;
 		this.pitch = ((EntityHuman) this.passengers).pitch * 0.75f;
@@ -92,15 +85,6 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 		super.g(sideMot, forMot);
 	}
 
-    protected void bG()
-    {
-        this.motY += 0.03999999910593033D;
-    }
-
-	public boolean k_()
-	{
-		return false;
-	}
 
 	@Override
 	public float getClimbHeight()
@@ -173,4 +157,5 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 	{
 		this.sidewaySpeed = sidewaySpeed;
 	}
+
 }

@@ -6,16 +6,16 @@ import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 
 import java.lang.reflect.Field;
 
-public class RideableCaveSpider extends EntityCaveSpider implements RideableEntity
+public class RideableChicken extends EntityChicken implements RideableEntity
 {
 	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed;
 
-	public RideableCaveSpider(org.bukkit.World world)
+	public RideableChicken(org.bukkit.World world)
 	{
 		this(((CraftWorld)world).getHandle());
 	}
 
-	public RideableCaveSpider(World world)
+	public RideableChicken(World world)
 	{
 		super(world);
 		this.climbHeight = 1f;
@@ -24,18 +24,11 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 		this.speed = 1f;
 		this.backwardSpeed = 0.25f;
 		this.sidewaySpeed = 0.4f;
-
+		
 		this.goalSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 		this.targetSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 
 		this.getAttributeInstance(GenericAttributes.maxHealth).setValue(20.0D);
-	}
-
-	@Override
-	public void aQ()
-	{
-		this.E = true;
-		this.fallDistance = 0;
 	}
 	
 	@Override
@@ -44,9 +37,9 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 		if(this.passengers == null || !(this.passengers instanceof EntityHuman))
 		{
 			this.P = 0.5f;
-	        super.g(sideMot, forMot);
-	        return;
-	    }
+			super.g(sideMot, forMot);
+			return;
+		}
 		
 		this.lastYaw = this.yaw = ((EntityHuman) this.passengers).yaw;
 		this.pitch = ((EntityHuman) this.passengers).pitch * 0.75f;
@@ -91,16 +84,128 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 		this.k(this.speed / 5);
 		super.g(sideMot, forMot);
 	}
+	
+	@Override
+	public void m()
+	{	
+		if (this.getEntityLivingbn() > 0)
+			this.setEntityLivingbn(this.getEntityLivingbn() - 1);
 
-    protected void bG()
-    {
-        this.motY += 0.03999999910593033D;
-    }
+	    if (this.bg > 0)
+	    {
+	      double d0 = this.locX + (this.bd - this.locX) / this.bg;
+	      double d1 = this.locY + (this.be - this.locY) / this.bg;
+	      double d2 = this.locZ + (this.bf - this.locZ) / this.bg;
+	      double d3 = MathHelper.g(this.bg - this.yaw);
+	      
+	      this.yaw = ((float)(this.yaw + d3 / this.bg));
+	      this.pitch = ((float)(this.pitch + (this.bh - this.pitch) / this.bg));
+	      this.bg -= 1;
+	      setPosition(d0, d1, d2);
+	      setYawPitch(this.yaw, this.pitch);
+	    }
+	    else if (!co())
+	    {
+	      this.motX *= 0.98D;
+	      this.motY *= 0.98D;
+	      this.motZ *= 0.98D;
+	    }
+	    if (Math.abs(this.motX) < 0.005D) {
+	      this.motX = 0.0D;
+	    }
+	    if (Math.abs(this.motY) < 0.005D) {
+	      this.motY = 0.0D;
+	    }
+	    if (Math.abs(this.motZ) < 0.005D) {
+	      this.motZ = 0.0D;
+	    }
+	    this.world.methodProfiler.a("ai");
+	    
+	    if (cf())
+	    {
+	      this.bc = false;
+	      this.aZ = 0.0F;
+	      this.be = 0.0F;
+	      this.bf = 0.0F;
+	    }
+	    else if (co())
+	    {
+	      this.world.methodProfiler.a("newAi");
+	      doTick();
+	      this.world.methodProfiler.b();
+	    }
+	    
+	    this.world.methodProfiler.b();
+	    this.world.methodProfiler.a("jump");
+	    if (this.bc)
+	    {
+	      if (isInWater())
+	      {
+	        ci();
+	      }
+	      else if (an())
+	      {
+	        bH();
+	      }
+	      else if ((this.onGround) && (this.getEntityLivingbn() == 0))
+	      {
+	        ch();
+	        this.setEntityLivingbn(10);
+	      }
+	    }
+	    else
+	    {
+	    	this.setEntityLivingbn(0);
+	    }
+	    this.world.methodProfiler.b();
+	    this.world.methodProfiler.a("travel");
+	    this.aZ *= 0.98F;
+	    this.ba *= 0.98F;
+	    this.bf *= 0.9F;
 
-	public boolean k_()
-	{
-		return false;
+	    g(this.aZ, this.ba);
+
+	    this.world.methodProfiler.b();
+	    this.world.methodProfiler.a("push");
+	    if (!this.world.isClientSide)
+	    {
+	      cn();
+	    }
+	    this.world.methodProfiler.b();
 	}
+	
+	public int getEntityLivingbn()
+	{
+		try
+		{
+			Field bn = EntityLiving.class.getDeclaredField("bn");
+			if(!bn.isAccessible())
+				bn.setAccessible(true);
+			return bn.getInt(this);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public void setEntityLivingbn(int value)
+	{
+		try
+		{
+			Field bn = EntityLiving.class.getDeclaredField("bn");
+			if(!bn.isAccessible())
+				bn.setAccessible(true);
+			bn.setInt(this, value);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+
 
 	@Override
 	public float getClimbHeight()
@@ -173,4 +278,5 @@ public class RideableCaveSpider extends EntityCaveSpider implements RideableEnti
 	{
 		this.sidewaySpeed = sidewaySpeed;
 	}
+
 }
