@@ -48,7 +48,7 @@ public abstract class ItemPurchase implements PurchaseType
             id = Integer.parseInt(item.split("[xX][ ]?")[1]);
 
         player.getInventory().addItem(new ItemStack(Material.getMaterial(id), amount, data));
-	    new SoundEffect(Sound.ENTITY_PLAYER_LEVELUP, 1f, 1f).play(player);
+	    new SoundEffect(Sound.ANVIL_LAND, 1f, 1f).play(player);
     }
 
     @Override

@@ -284,6 +284,7 @@ public abstract class StateGame implements Game
 		this.state.leave(p);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Location getWarp()
 	{
@@ -301,7 +302,7 @@ public abstract class StateGame implements Game
 		
 		return state.getStatus();
 	}
-	
+	@SuppressWarnings("deprecation")
 	public String getChatName(Player p)
 	{
 		if(this.config != null && this.config.useDisplaynames())

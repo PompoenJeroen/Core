@@ -17,6 +17,7 @@ public class PlayerStats
 		return data;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void join(Player player)
 	{
 		long time = System.currentTimeMillis();

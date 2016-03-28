@@ -3,7 +3,6 @@ package me.winterguardian.core.shop;
 import me.winterguardian.core.Core;
 import me.winterguardian.core.message.Message;
 import me.winterguardian.core.playerstats.PlayerStats;
-import me.winterguardian.core.userdata.UserData;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
