@@ -8,25 +8,18 @@ import java.lang.reflect.Field;
 import me.winterguardian.core.entity.custom.BlockHolder;
 import me.winterguardian.core.entity.custom.CustomNoAI;
 import me.winterguardian.core.entity.custom.rideable.RideableEntity;
-import net.minecraft.server.v1_9_R1.Block;
-import net.minecraft.server.v1_9_R1.BlockPosition;
-import net.minecraft.server.v1_9_R1.Blocks;
-import net.minecraft.server.v1_9_R1.DamageSource;
-import net.minecraft.server.v1_9_R1.EnchantmentManager;
-import net.minecraft.server.v1_9_R1.EntityFallingBlock;
-import net.minecraft.server.v1_9_R1.EntityHuman;
-import net.minecraft.server.v1_9_R1.EntityLiving;
-import net.minecraft.server.v1_9_R1.MathHelper;
-import net.minecraft.server.v1_9_R1.World;
+import net.minecraft.server.v1_9_R1.*;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_9_R1.TrigMath;
 import org.bukkit.craftbukkit.v1_9_R1.event.CraftEventFactory;
 import org.bukkit.craftbukkit.v1_9_R1.util.CraftMagicNumbers;
+
 import org.bukkit.entity.LivingEntity;
 
 public class RideableBlock extends EntityFallingBlock implements RideableEntity, BlockHolder, CustomNoAI
 {
+
     public int at;
     public float ay;
     public float az;
@@ -46,6 +39,7 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
     protected boolean aY;
     public float aZ;
     public float ba;
+    public float mm;
     protected float bb;
     protected int bc;
     protected double bd;
@@ -118,12 +112,12 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
     }
 
 
-    public void g(float sideMot, float forMot)
+    public void g(float sideMot, float forMot, EntityLiving entity)
     {
         if(this.passengers == null || !(this.passengers instanceof EntityHuman))
         {
             this.P = 0.6f;
-            superg(sideMot, forMot);
+            superg(sideMot, forMot, entity);
             return;
         }
 
@@ -168,7 +162,7 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
             }
 
         this.bm = this.speed / 5;
-        superg(sideMot, forMot);
+        superg(sideMot, forMot, entity);
     }
 
     @Override
@@ -343,20 +337,20 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
         this.aZ *= 0.98F;
         this.ba *= 0.98F;
         this.bb *= 0.9F;
-        g(this.aZ, this.ba);
+        g(this.aZ, this.ba, this.mm);
         this.world.methodProfiler.b();
         this.world.methodProfiler.a("push");
         this.world.methodProfiler.b();
     }
 
-    public void superg (float f, float f1)
+    public void superg (float f, float f1, EntityLiving entity)
     {
         if(isInWater())
         {
             double d0 = this.locY;
             float f3 = 0.8F;
             float f4 = 0.02F;
-            float f2 = EnchantmentManager.d(this);
+            float f2 = EnchantmentManager.d(entity);
             if (f2 > 3.0F) {
                 f2 = 3.0F;
             }
@@ -423,7 +417,7 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
             if ((this.positionChanged) && (k_())) {
                 this.motY = 0.2D;
             }
-            if ((this.world.isClientSide) && ((!this.world.isLoaded(new BlockPosition((int)this.locX, 0, (int)this.locZ))) || (!this.world.getChunkAtWorldCoords(new BlockPosition((int)this.locX, 0, (int)this.locZ)).o())))
+            if ((this.world.isClientSide) && ((!this.world.isLoaded(new BlockPosition((int)this.locX, 0, (int)this.locZ))) || (!this.world.getChunkAtWorldCoords(new BlockPosition((int)this.locX, 0, (int)this.locZ)).p())))
             {
                 if (this.locY > 0.0D) {
                     this.motY = -0.1D;
@@ -460,7 +454,7 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
             this.motX -= MathHelper.sin(f) * 0.2F;
             this.motZ += MathHelper.cos(f) * 0.2F;
         }
-        this.ai = true;
+        this.impulse = true;
     }
 
     protected void bG()
@@ -613,9 +607,9 @@ public class RideableBlock extends EntityFallingBlock implements RideableEntity,
     }
 
     @Override
-    public void aA()
+    public void aQ()
     {
-        this.H = true;
+        this.E = true;
         this.fallDistance = 0;
     }
 }
