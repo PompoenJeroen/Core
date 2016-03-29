@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Core.iml" filepath="$PROJECT_DIR$/Core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Sekai-Crea/Sekai-Crea.iml" filepath="$PROJECT_DIR$/Sekai-Crea/Sekai-Crea.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Sekai/Sekai-Hub.iml" filepath="$PROJECT_DIR$/Sekai/Sekai-Hub.iml" />
     </modules>
   </component>
 </project>
