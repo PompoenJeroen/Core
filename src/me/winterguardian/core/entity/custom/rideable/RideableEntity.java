@@ -14,6 +14,9 @@ public interface RideableEntity
 	float getSpeed();
 	void setSpeed(float speed);
 
+	float getAcceleration();
+	void setAcceleration(float acceleration);
+
 	float getBackwardSpeed();
 	void setBackwardSpeed(float backwardSpeed);
 

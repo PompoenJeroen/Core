@@ -9,6 +9,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.FallingBlock;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import me.winterguardian.core.entity.custom.rideable.RideableEntity;
 
 import java.lang.reflect.Constructor;
 
@@ -28,10 +29,7 @@ public class RideableEntityUtil
 		
 		switch(type)
 		{
-			
-		case BOAT:
-			className = "RideableBoat";
-			break;
+
 			
 		case CAVE_SPIDER:
 			className = "RideableCaveSpider";
@@ -45,24 +43,12 @@ public class RideableEntityUtil
 			className = "RideableCow";
 			break;
 			
-		case FALLING_BLOCK:
-			className = "RideableBlock";
-			break;
-			
 		case GUARDIAN:
 			className = "RideableGuardian";
 			break;
 			
-		case HORSE:
-			className = "RideableHorse";
-			break;
-			
 		case MAGMA_CUBE:
 			className = "RideableMagmaCube";
-			break;
-			
-		case MINECART:
-			className = "RideableMinecart";
 			break;
 			
 		case MUSHROOM_COW:
@@ -97,10 +83,6 @@ public class RideableEntityUtil
 			className = "RideableSpider";
 			break;
 			
-		case SQUID:
-			className = "RideableSquid";
-			break;
-			
 		case WOLF:
 			className = "RideableWolf";
 			break;
@@ -108,7 +90,7 @@ public class RideableEntityUtil
 		case ZOMBIE:
 			className = "RideableZombie";
 			break;
-			
+
 		default:
 			return null;
 		

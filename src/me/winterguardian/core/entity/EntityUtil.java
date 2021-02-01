@@ -236,7 +236,7 @@ public class EntityUtil
 			Method cMethodFromBoundingBoxClass = axisAlignedBBClass.getDeclaredMethod("c", entityClass, double.class, double.class, double.class);
 			Method getCubesFromWorldClass = worldClass.getMethod("getCubes", entityClass, axisAlignedBBClass);
 
-			net.minecraft.server.v1_8_R3.Entity entity = (net.minecraft.server.v1_8_R3.Entity)ReflectionUtil.getHandle(bukkitEntity);
+			net.minecraft.server.v1_12_R1.Entity entity = (net.minecraft.server.v1_12_R1.Entity)ReflectionUtil.getHandle(bukkitEntity);
 			Object world = ReflectionUtil.getHandle(bukkitEntity.getWorld());
 
 			double originalY = y;

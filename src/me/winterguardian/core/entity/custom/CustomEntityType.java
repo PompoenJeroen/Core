@@ -7,12 +7,13 @@ import me.winterguardian.core.util.ReflectionUtil;
 
 public enum CustomEntityType
 {
-	RIDEABLE_BOAT("Boat", 41, "<base>.rideable.<version>.RideableBoat"),
 
 	RIDEABLE_SPIDER("Spider", 52, "<base>.rideable.<version>.RideableSpider"),
 
 	RIDEABLE_ZOMBIE("Zombie", 54, "<base>.rideable.<version>.RideableZombie"),
 	RIDEABLE_SLIME("Slime", 55, "<base>.rideable.<version>.RideableSlime"),
+	RIDEABLE_POLAR_BEAR("PolarBear", 102, "<base>.rideable.<version>.RideablePolarBear"),
+	RIDEABLE_LLAMA("Llama", 103, "<base>.rideable.<version>.RideableLlama"),
 
 	RIDEABLE_CAVE_SPIDER("CaveSpider", 59, "<base>.rideable.<version>.RideableCaveSpider"),
 	RIDEABLE_SILVERFISH("Silverfish", 60, "<base>.rideable.<version>.RideableSilverfish"),
@@ -25,13 +26,11 @@ public enum CustomEntityType
 	RIDEABLE_SHEEP("Sheep", 91, "<base>.rideable.<version>.RideableSheep"),
 	RIDEABLE_COW("Cow", 92, "<base>.rideable.<version>.RideableCow"),
 	RIDEABLE_CHICKEN("Chicken", 93, "<base>.rideable.<version>.RideableChicken"),
-	RIDEABLE_SQUID("Squid", 94, "<base>.rideable.<version>.RideableSquid"),
 	RIDEABLE_WOLF("Wolf", 95, "<base>.rideable.<version>.RideableWolf"),
 	RIDEABLE_MUSHROOM_COW("MushroomCow", 96, "<base>.rideable.<version>.RideableMushroomCow"),
 
-	RIDEABLE_OCELOT("Ozelot", 98, "<base>.rideable.<version>.RideableOcelot"),
+	RIDEABLE_OCELOT("Ocelot", 98, "<base>.rideable.<version>.RideableOcelot"),
 
-	RIDEABLE_HORSE("EntityHorse", 100, "<base>.rideable.<version>.RideableHorse"),
 	RIDEABLE_RABBIT("Rabbit", 101, "<base>.rideable.<version>.RideableRabbit"),
 
 	NPC_VILLAGER("Villager", 120, "<base>.npc.<version>.NPCVillager"),
