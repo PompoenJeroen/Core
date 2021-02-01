@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 
 public class RideableSilverfish extends EntitySilverfish implements RideableEntity
 {
-	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed;
+	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed, acceleration;
 
 	public RideableSilverfish(org.bukkit.World world)
 	{
@@ -24,6 +24,7 @@ public class RideableSilverfish extends EntitySilverfish implements RideableEnti
 		this.speed = 1f;
 		this.backwardSpeed = 0.25f;
 		this.sidewaySpeed = 0.4f;
+		this.acceleration = 1.05f;
 		
 		this.goalSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 		this.targetSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
@@ -133,6 +134,18 @@ public class RideableSilverfish extends EntitySilverfish implements RideableEnti
 	public void setSpeed(float speed)
 	{
 		this.speed = speed;
+	}
+
+	@Override
+	public float getAcceleration()
+	{
+		return this.acceleration;
+	}
+
+	@Override
+	public void setAcceleration(float acceleration)
+	{
+		this.acceleration = acceleration;
 	}
 
 	@Override

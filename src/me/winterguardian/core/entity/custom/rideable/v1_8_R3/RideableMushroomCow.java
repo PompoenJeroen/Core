@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 
 public class RideableMushroomCow extends EntityMushroomCow implements RideableEntity
 {
-	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed;
+	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed, acceleration;
 
 	public RideableMushroomCow(org.bukkit.World world)
 	{
@@ -24,6 +24,7 @@ public class RideableMushroomCow extends EntityMushroomCow implements RideableEn
 		this.speed = 1f;
 		this.backwardSpeed = 0.25f;
 		this.sidewaySpeed = 0.4f;
+		this.acceleration = 0.9f;
 		
 		this.goalSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 		this.targetSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
@@ -120,6 +121,18 @@ public class RideableMushroomCow extends EntityMushroomCow implements RideableEn
 	public void setJumpThrust(float jumpThrust)
 	{
 		this.jumpThrust = jumpThrust;
+	}
+
+	@Override
+	public float getAcceleration()
+	{
+		return this.acceleration;
+	}
+
+	@Override
+	public void setAcceleration(float acceleration)
+	{
+		this.acceleration = acceleration;
 	}
 
 	@Override

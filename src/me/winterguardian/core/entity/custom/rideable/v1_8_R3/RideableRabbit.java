@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
 
 public class RideableRabbit extends EntityRabbit implements RideableEntity
 {
-	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed;
+	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed, acceleration;
 
 	public RideableRabbit(org.bukkit.World world)
 	{
@@ -18,12 +18,13 @@ public class RideableRabbit extends EntityRabbit implements RideableEntity
 	public RideableRabbit(World world)
 	{
 		super(world);
-		this.climbHeight = 1f;
-		this.jumpHeight = 1f;
-		this.jumpThrust = 1f;
+		this.climbHeight = 1.1f;
+		this.jumpHeight = 1.1f;
+		this.jumpThrust = 1.1f;
 		this.speed = 1f;
 		this.backwardSpeed = 0.25f;
 		this.sidewaySpeed = 0.4f;
+		this.acceleration = 1.05f;
 		
 		this.goalSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 		this.targetSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
@@ -119,6 +120,18 @@ public class RideableRabbit extends EntityRabbit implements RideableEntity
 	public void setJumpThrust(float jumpThrust)
 	{
 		this.jumpThrust = jumpThrust;
+	}
+
+	@Override
+	public float getAcceleration()
+	{
+		return this.acceleration;
+	}
+
+	@Override
+	public void setAcceleration(float acceleration)
+	{
+		this.acceleration = acceleration;
 	}
 
 	@Override

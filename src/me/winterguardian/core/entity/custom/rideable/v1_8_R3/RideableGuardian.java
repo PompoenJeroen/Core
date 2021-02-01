@@ -19,7 +19,7 @@ public class RideableGuardian extends EntityGuardian implements RideableEntity
 {
 	private boolean reallyOnGround;
 	
-	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed;
+	private float climbHeight, jumpHeight, jumpThrust, speed, backwardSpeed, sidewaySpeed, acceleration;
 
 	public RideableGuardian(org.bukkit.World world)
 	{
@@ -35,6 +35,7 @@ public class RideableGuardian extends EntityGuardian implements RideableEntity
 		this.speed = 1f;
 		this.backwardSpeed = 0.25f;
 		this.sidewaySpeed = 0.4f;
+		this.acceleration = 1f;
 		
 		this.goalSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
 		this.targetSelector = new PathfinderGoalSelector((world != null) && (world.methodProfiler != null) ? world.methodProfiler : null);
@@ -682,6 +683,18 @@ public class RideableGuardian extends EntityGuardian implements RideableEntity
 	public void setJumpThrust(float jumpThrust)
 	{
 		this.jumpThrust = jumpThrust;
+	}
+
+	@Override
+	public float getAcceleration()
+	{
+		return this.acceleration;
+	}
+
+	@Override
+	public void setAcceleration(float acceleration)
+	{
+		this.acceleration = acceleration;
 	}
 
 	@Override
